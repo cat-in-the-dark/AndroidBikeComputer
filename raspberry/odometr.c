@@ -15,13 +15,13 @@ int main(){
 	int last_cycle = millis();
 	
 	for(;;) {
-		while(digitalRead(pin) == HIGH) { delay(1); } // whate for cycle
+		while(digitalRead(pin) == HIGH) { delay(1); } // wait for cycle
 		
 		speed = wheel_length / (millis() - last_cycle); // in m/s
 		printf("%f\n", speed * multiplier);
 		last_cycle = millis();
 
-		while(digitalRead(pin) == LOW){ delay(1); } // whate for unlocking reed switch (gerkon in rus)
+		while(digitalRead(pin) == LOW){ delay(1); } // wait for unlocking reed switch (gerkon in rus)
 	}
 
 	return 0;
