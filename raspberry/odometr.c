@@ -12,13 +12,15 @@ int main(){
 	pinMode(pin, INPUT);
 	
 	float speed;
+	long double total_distance = 0.0;
 	int last_cycle = millis();
 	
 	for(;;) {
 		while(digitalRead(pin) == HIGH) { delay(1); } // whate for cycle
 		
 		speed = wheel_length / (millis() - last_cycle); // in m/s
-		printf("%f\n", speed * multiplier);
+		total_distance += wheel_length;
+		printf("SPEED: %4.2f\tDISTANCE: %.2Lf\n", speed * multiplier, total_distance / 1000.0);
 		last_cycle = millis();
 
 		while(digitalRead(pin) == LOW){ delay(1); } // whate for unlocking reed switch (gerkon in rus)
