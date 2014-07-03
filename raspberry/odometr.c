@@ -16,14 +16,14 @@ int main(){
 	int last_cycle = millis();
 	
 	for(;;) {
-		while(digitalRead(pin) == HIGH) { delay(1); } // whate for cycle
+		while(digitalRead(pin) == HIGH) { delay(1); } // wait for cycle
 		
 		speed = wheel_length / (millis() - last_cycle); // in m/s
 		total_distance += wheel_length;
 		printf("SPEED: %4.2f\tDISTANCE: %.2Lf\n", speed * multiplier, total_distance / 1000.0);
 		last_cycle = millis();
 
-		while(digitalRead(pin) == LOW){ delay(1); } // whate for unlocking reed switch (gerkon in rus)
+		while(digitalRead(pin) == LOW){ delay(1); } // wait for unlocking reed switch (gerkon in rus)
 	}
 
 	return 0;
