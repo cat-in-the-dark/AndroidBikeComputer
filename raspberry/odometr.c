@@ -12,6 +12,7 @@ int main(){
 	pinMode(pin, INPUT);
 	
 	float speed;
+	float avg_speed;
 	long double total_distance = 0.0;
 	int last_cycle = millis();
 	
@@ -20,7 +21,8 @@ int main(){
 		
 		speed = wheel_length / (millis() - last_cycle); // in m/s
 		total_distance += wheel_length;
-		printf("SPEED: %4.2f\tDISTANCE: %.2Lf\n", speed * multiplier, total_distance / 1000.0);
+		avg_speed = total_distance / millis();
+		printf("SPEED: %4.2f\tDISTANCE: %.2Lf\tAVG_SPEED: %4.2f\n", speed * multiplier, total_distance / 1000.0, avg_speed * multiplier);
 		last_cycle = millis();
 
 		while(digitalRead(pin) == LOW){ delay(1); } // wait for unlocking reed switch (gerkon in rus)
