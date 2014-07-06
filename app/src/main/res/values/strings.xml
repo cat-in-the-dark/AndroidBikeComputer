@@ -9,5 +9,6 @@
     <string name="thick">Thick</string>
     <string name="save">Save</string>
     <string name="default_speed">0.0</string>
+    <string name="wheel_size_hint">Or input wheel size</string>
 
 </resources>

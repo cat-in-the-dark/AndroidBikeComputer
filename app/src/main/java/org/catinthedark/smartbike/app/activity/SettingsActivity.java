@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 import org.catinthedark.smartbike.app.R;
 import org.catinthedark.smartbike.app.calculator.WheelCalculator;
@@ -33,12 +34,20 @@ public class SettingsActivity extends ActionBarActivity {
         thicknessNumberPicker.setMinValue(0);
         thicknessNumberPicker.setValue(preferences.getInt(TIRE_THICKNESS_INDEX_KEY, 0));
 
+        final EditText wheelSizeEditText = (EditText) findViewById(R.id.wheelSizeEditText);
+
         Button saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 float tireThickness = Float.valueOf(WheelCalculator.TIRE_THICKNESS_LIST[thicknessNumberPicker.getValue()]);
-                int wheelSize = WheelCalculator.calculateWheelLength(diameterNumberPicker.getValue(), tireThickness);
+
+                int wheelSize;
+                if (wheelSizeEditText.getText().length() == 0) {
+                    wheelSize = WheelCalculator.calculateWheelLength(diameterNumberPicker.getValue(), tireThickness);
+                } else {
+                    wheelSize = Integer.valueOf(wheelSizeEditText.getText().toString());
+                }
 
                 SharedPreferences preferences = getSharedPreferences(MainActivity.SHARED_PREFS_NAME, 0);
                 SharedPreferences.Editor preferencesEditor = preferences.edit();

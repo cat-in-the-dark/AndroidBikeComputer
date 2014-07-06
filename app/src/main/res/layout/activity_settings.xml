@@ -49,4 +49,13 @@
             android:text="@string/save"
             android:id="@+id/saveButton" android:layout_alignTop="@+id/space" android:layout_alignRight="@+id/currentSpeedTextView"
             android:layout_alignEnd="@+id/currentSpeedTextView"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/wheelSizeEditText" android:layout_below="@+id/saveButton"
+            android:hint="@string/wheel_size_hint"
+            android:layout_alignRight="@+id/thicknessNumberPicker"
+            android:layout_alignEnd="@+id/thicknessNumberPicker"/>
 </RelativeLayout>
