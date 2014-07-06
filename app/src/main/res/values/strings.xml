@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SmartBike</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="diameter">Diameter</string>
+    <string name="select_parameters">Select parameters of your wheel:</string>
+    <string name="thick">Thick</string>
+    <string name="save">Save</string>
+    <string name="default_speed">0.0</string>
+
+</resources>
