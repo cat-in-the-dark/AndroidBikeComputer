@@ -19,3 +19,9 @@
 *.exe
 *.out
 *.app
+
+android/local.properties
+android/*.iml
+android/.idea
+android/.gradle
+android/app/app.iml
