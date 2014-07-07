@@ -36,14 +36,8 @@ public class MainActivity extends ActionBarActivity {
 
         currentSpeedTextView = (TextView) findViewById(R.id.currentSpeedTextView);
 
-        SharedPreferences preferences = getSharedPreferences(SHARED_PREFS_NAME, 0);
-        wheelSize = preferences.getInt(WHEEL_SIZE_PREFS_KEY, 0);
-        if (wheelSize == 0) {
-            openSettings();
-        }
-
         IntentFilter mediaButtonfilter = new IntentFilter();
-//        mediaButtonfilter.addAction("android.intent.action.ACTION_MEDIA_BUTTON");
+        mediaButtonfilter.addAction("android.intent.action.ACTION_MEDIA_BUTTON");
         mediaButtonfilter.setPriority(1000);
 
         mediaButtonReceiver = new MediaButtonReceiver();
@@ -56,10 +50,19 @@ public class MainActivity extends ActionBarActivity {
         IntentFilter cycleFilter = new IntentFilter();
         cycleFilter.addAction(CYCLE_RECEIVER_ACTION);
         registerReceiver(wheelCycleReceiver, cycleFilter);
+
+        SharedPreferences preferences = getSharedPreferences(SHARED_PREFS_NAME, 0);
+        wheelSize = preferences.getInt(WHEEL_SIZE_PREFS_KEY, 0);
+        if (wheelSize == 0) {
+            openSettings();
+        }
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent keyevent) {
-        if (keyCode == KeyEvent.KEYCODE_C && keyevent.getAction() == KeyEvent.ACTION_DOWN) {
+        if ((keyCode == KeyEvent.KEYCODE_MEDIA_PLAY
+                || keyCode == KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE
+                || keyCode == KeyEvent.KEYCODE_HEADSETHOOK)
+                && keyevent.getAction() == KeyEvent.ACTION_DOWN) {
             sendBroadcast(new Intent(CYCLE_RECEIVER_ACTION));
             return true;
         }
@@ -70,7 +73,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
         registerReceiver(wheelCycleReceiver, new IntentFilter(CYCLE_RECEIVER_ACTION));
-        registerReceiver(mediaButtonReceiver, new IntentFilter("android.media.VOLUME_CHANGED_ACTION"));
+        registerReceiver(mediaButtonReceiver, new IntentFilter("android.action.ACTION_MEDIA_BUTTON"));
     }
 
     @Override
