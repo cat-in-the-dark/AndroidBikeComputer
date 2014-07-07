@@ -20,8 +20,19 @@
 *.out
 *.app
 
+*.class
+*.apk
+*.ap_
+*.dex
+*.log
+
 android/local.properties
 android/*.iml
 android/.idea
 android/.gradle
 android/app/app.iml
+android/bin/
+android/gen/
+android/.gradle/
+android/build/
+android/proguard/
