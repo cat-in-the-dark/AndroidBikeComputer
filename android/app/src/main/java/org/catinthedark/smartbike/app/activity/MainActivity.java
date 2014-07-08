@@ -9,7 +9,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 import org.catinthedark.smartbike.app.R;
-import org.catinthedark.smartbike.app.receiver.MediaButtonReceiver;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -18,7 +17,6 @@ public class MainActivity extends ActionBarActivity {
     public static final String SHARED_PREFS_NAME = "SmartBikeSettings";
     public static final String CYCLE_RECEIVER_ACTION = "speed_received";
 
-    private MediaButtonReceiver mediaButtonReceiver;
     private int wheelSize;
     private TextView currentSpeedTextView;
 
@@ -36,17 +34,6 @@ public class MainActivity extends ActionBarActivity {
 
         currentSpeedTextView = (TextView) findViewById(R.id.currentSpeedTextView);
 
-        IntentFilter mediaButtonfilter = new IntentFilter();
-        mediaButtonfilter.addAction("android.intent.action.ACTION_MEDIA_BUTTON");
-        mediaButtonfilter.setPriority(1000);
-
-        mediaButtonReceiver = new MediaButtonReceiver();
-        registerReceiver(mediaButtonReceiver, mediaButtonfilter);
-//        ((AudioManager)getSystemService(AUDIO_SERVICE)).registerMediaButtonEventReceiver(
-//                new ComponentName(
-//                        getPackageName(),
-//                        MediaButtonReceiver.class.getName()));
-
         IntentFilter cycleFilter = new IntentFilter();
         cycleFilter.addAction(CYCLE_RECEIVER_ACTION);
         registerReceiver(wheelCycleReceiver, cycleFilter);
@@ -59,9 +46,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent keyevent) {
-        if ((keyCode == KeyEvent.KEYCODE_MEDIA_PLAY
-                || keyCode == KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE
-                || keyCode == KeyEvent.KEYCODE_HEADSETHOOK)
+        if ((keyCode == KeyEvent.KEYCODE_HEADSETHOOK)
                 && keyevent.getAction() == KeyEvent.ACTION_DOWN) {
             sendBroadcast(new Intent(CYCLE_RECEIVER_ACTION));
             return true;
@@ -73,7 +58,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
         registerReceiver(wheelCycleReceiver, new IntentFilter(CYCLE_RECEIVER_ACTION));
-        registerReceiver(mediaButtonReceiver, new IntentFilter("android.action.ACTION_MEDIA_BUTTON"));
     }
 
     @Override
@@ -97,21 +81,19 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void openSettings() {
-        Intent intent = new Intent(this, SettingsActivity.class);
-        if (mediaButtonReceiver != null) {
-            unregisterReceiver(mediaButtonReceiver);
-        }
         if (wheelCycleReceiver != null) {
             unregisterReceiver(wheelCycleReceiver);
         }
+
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 
-    private long timestamp = 0;
+    private long cycleTimestamp = 0;
     private String updateSpeed() {
-        long oldTimestamp = timestamp;
-        timestamp = System.currentTimeMillis();
-        long cycleInterval = timestamp - oldTimestamp;  // in ms
+        long oldTimestamp = cycleTimestamp;
+        cycleTimestamp = System.currentTimeMillis();
+        long cycleInterval = cycleTimestamp - oldTimestamp;  // in ms
 
         if (oldTimestamp != 0) {
             float speedInMs = (float) wheelSize / (float) cycleInterval;
