@@ -57,7 +57,6 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(wheelCycleReceiver, new IntentFilter(CYCLE_RECEIVER_ACTION));
     }
 
     @Override
