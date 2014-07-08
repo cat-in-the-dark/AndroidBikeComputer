@@ -35,4 +35,5 @@ android/bin/
 android/gen/
 android/.gradle/
 android/build/
+android/app/build/
 android/proguard/
