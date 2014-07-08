@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import org.catinthedark.smartbike.app.R;
-import org.catinthedark.smartbike.app.calculator.WheelCalculator;
+import org.catinthedark.smartbike.app.calculator.SpeedCalculator;
 
 public class SettingsActivity extends ActionBarActivity {
 
@@ -24,13 +24,13 @@ public class SettingsActivity extends ActionBarActivity {
         SharedPreferences preferences = getSharedPreferences(MainActivity.SHARED_PREFS_NAME, 0);
 
         final NumberPicker diameterNumberPicker = (NumberPicker) findViewById(R.id.diameterNumberPicker);
-        diameterNumberPicker.setMaxValue(WheelCalculator.RIM_DIAMETER_MAX);
-        diameterNumberPicker.setMinValue(WheelCalculator.RIM_DIAMETER_MIN);
-        diameterNumberPicker.setValue(preferences.getInt(RIM_DIAMETER_KEY, WheelCalculator.RIM_DIAMETER_MIN));
+        diameterNumberPicker.setMaxValue(SpeedCalculator.RIM_DIAMETER_MAX);
+        diameterNumberPicker.setMinValue(SpeedCalculator.RIM_DIAMETER_MIN);
+        diameterNumberPicker.setValue(preferences.getInt(RIM_DIAMETER_KEY, SpeedCalculator.RIM_DIAMETER_MIN));
 
         final NumberPicker thicknessNumberPicker = (NumberPicker) findViewById(R.id.thicknessNumberPicker);
-        thicknessNumberPicker.setDisplayedValues(WheelCalculator.TIRE_THICKNESS_LIST);
-        thicknessNumberPicker.setMaxValue(WheelCalculator.TIRE_THICKNESS_LIST.length - 1);
+        thicknessNumberPicker.setDisplayedValues(SpeedCalculator.TIRE_THICKNESS_LIST);
+        thicknessNumberPicker.setMaxValue(SpeedCalculator.TIRE_THICKNESS_LIST.length - 1);
         thicknessNumberPicker.setMinValue(0);
         thicknessNumberPicker.setValue(preferences.getInt(TIRE_THICKNESS_INDEX_KEY, 0));
 
@@ -40,11 +40,11 @@ public class SettingsActivity extends ActionBarActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                float tireThickness = Float.valueOf(WheelCalculator.TIRE_THICKNESS_LIST[thicknessNumberPicker.getValue()]);
+                float tireThickness = Float.valueOf(SpeedCalculator.TIRE_THICKNESS_LIST[thicknessNumberPicker.getValue()]);
 
                 int wheelSize;
                 if (wheelSizeEditText.getText().length() == 0) {
-                    wheelSize = WheelCalculator.calculateWheelLength(diameterNumberPicker.getValue(), tireThickness);
+                    wheelSize = SpeedCalculator.calculateWheelLength(diameterNumberPicker.getValue(), tireThickness);
                 } else {
                     wheelSize = Integer.valueOf(wheelSizeEditText.getText().toString());
                 }
