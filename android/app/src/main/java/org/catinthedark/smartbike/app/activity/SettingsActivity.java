@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.Switch;
 
 import org.catinthedark.smartbike.app.R;
 import org.catinthedark.smartbike.app.calculator.SpeedCalculator;
@@ -23,11 +24,15 @@ public class SettingsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_settings);
 
         final EditText wheelSizeEditText = (EditText) findViewById(R.id.wheelSizeEditText);
+        final Switch speedUnitsSwitch = (Switch) findViewById(R.id.speedUnitsSwitch);
 
         SharedPreferences preferences = getSharedPreferences(MainActivity.SHARED_PREFS_NAME, 0);
         if (preferences.contains(MainActivity.WHEEL_SIZE_PREFS_KEY)) {
             CharSequence sequence = String.valueOf(preferences.getInt(MainActivity.WHEEL_SIZE_PREFS_KEY, 0));
             wheelSizeEditText.setText(sequence);
+        }
+        if (preferences.contains(MainActivity.SPEED_IN_MPH_PREFS_KEY)) {
+            speedUnitsSwitch.setChecked(preferences.getBoolean(MainActivity.SPEED_IN_MPH_PREFS_KEY, false));
         }
 
         Button saveButton = (Button) findViewById(R.id.saveButton);
@@ -36,10 +41,12 @@ public class SettingsActivity extends ActionBarActivity {
             public void onClick(View v) {
 
                 int wheelSize = Integer.valueOf(wheelSizeEditText.getText().toString());
+                boolean speenInmph = speedUnitsSwitch.isChecked();
 
                 SharedPreferences preferences = getSharedPreferences(MainActivity.SHARED_PREFS_NAME, 0);
                 SharedPreferences.Editor preferencesEditor = preferences.edit();
                 preferencesEditor.putInt(MainActivity.WHEEL_SIZE_PREFS_KEY, wheelSize);
+                preferencesEditor.putBoolean(MainActivity.SPEED_IN_MPH_PREFS_KEY, speenInmph);
                 preferencesEditor.apply();
                 Intent intent = new Intent(v.getContext(), MainActivity.class);
                 startActivity(intent);

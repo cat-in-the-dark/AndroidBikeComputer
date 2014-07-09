@@ -18,6 +18,7 @@ import java.util.TimerTask;
 public class MainActivity extends ActionBarActivity {
 
     public static final String WHEEL_SIZE_PREFS_KEY = "wheel_size";
+    public static final String SPEED_IN_MPH_PREFS_KEY = "speed_in_mph";
     public static final String SHARED_PREFS_NAME = "SmartBikeSettings";
     public static final String CYCLE_RECEIVER_ACTION = "speed_received";
 
@@ -25,6 +26,7 @@ public class MainActivity extends ActionBarActivity {
     private static final long STOP_INTERVAL = 5000;  // ms
     private int wheelSize;
     private long cycleTimestamp = 0;
+    private boolean speedInMph = false;
 
     private TextView currentSpeedTextView;
 
@@ -49,7 +51,11 @@ public class MainActivity extends ActionBarActivity {
             public void run() {
                 float currentSpeed = -1.0f;
                 if (lastCycleTimestamp != cycleTimestamp) {
-                    currentSpeed = SpeedCalculator.calculateSpeed(lastCycleTimestamp, cycleTimestamp, wheelSize, false);
+                    currentSpeed = SpeedCalculator.calculateSpeed(lastCycleTimestamp,
+                            cycleTimestamp,
+                            wheelSize,
+                            speedInMph);
+
                     lastCycleTimestamp = cycleTimestamp;
                 } else if (System.currentTimeMillis() - lastCycleTimestamp > STOP_INTERVAL) {
                     currentSpeed = 0.0f;
@@ -81,6 +87,7 @@ public class MainActivity extends ActionBarActivity {
 
         SharedPreferences preferences = getSharedPreferences(SHARED_PREFS_NAME, 0);
         wheelSize = preferences.getInt(WHEEL_SIZE_PREFS_KEY, 0);
+        speedInMph = preferences.getBoolean(SPEED_IN_MPH_PREFS_KEY, false);
         if (wheelSize == 0) {
             openSettings();
         }
