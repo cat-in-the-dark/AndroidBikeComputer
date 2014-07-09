@@ -94,7 +94,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent keyevent) {
-        if ((keyCode == KeyEvent.KEYCODE_HEADSETHOOK)
+        if ((keyCode == KeyEvent.KEYCODE_HEADSETHOOK || keyCode == KeyEvent.KEYCODE_C)
                 && keyevent.getAction() == KeyEvent.ACTION_DOWN) {
             cycleTimestamp = System.currentTimeMillis();
             return true;
