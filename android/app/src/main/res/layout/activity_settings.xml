@@ -1,5 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -8,54 +9,28 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="org.catinthedark.smartbike.app.activity.SettingsActivity">
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/select_parameters"
-            android:id="@+id/currentSpeedTextView" android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
-    <NumberPicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/diameterNumberPicker" android:layout_centerVertical="true" android:layout_alignLeft="@+id/currentSpeedTextView"
-            android:layout_alignStart="@+id/currentSpeedTextView"/>
-    <Space
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignBottom="@+id/diameterNumberPicker" android:layout_centerHorizontal="true"
-            android:id="@+id/space"/>
-    <NumberPicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/thicknessNumberPicker" android:layout_alignBottom="@+id/space"
-            android:layout_alignLeft="@+id/space" android:layout_alignStart="@+id/space"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/diameter"
-            android:id="@+id/textView2" android:layout_below="@+id/diameterNumberPicker"
-            android:layout_alignLeft="@+id/diameterNumberPicker" android:layout_alignStart="@+id/diameterNumberPicker"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/thick"
-            android:id="@+id/textView3" android:layout_alignTop="@+id/textView2" android:layout_alignLeft="@+id/space"
-            android:layout_alignStart="@+id/space"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/save"
-            android:id="@+id/saveButton" android:layout_alignTop="@+id/space" android:layout_alignRight="@+id/currentSpeedTextView"
-            android:layout_alignEnd="@+id/currentSpeedTextView"/>
     <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/wheelSizeEditText" android:layout_below="@+id/saveButton"
-            android:hint="@string/wheel_size_hint"
-            android:layout_alignRight="@+id/thicknessNumberPicker"
-            android:layout_alignEnd="@+id/thicknessNumberPicker"/>
-</RelativeLayout>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:hint="@string/wheel_size_hint"
+        android:id="@+id/wheelSizeEditText" />
+
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/speed_units"
+        android:textOff="km/h"
+        android:textOn="mph"
+        android:id="@+id/speedUnitsSwitch"
+        android:checked="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:id="@+id/saveButton"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>
