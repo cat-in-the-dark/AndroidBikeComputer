@@ -5,12 +5,8 @@ import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.NumberPicker;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Switch;
 
 import org.catinthedark.smartbike.app.R;

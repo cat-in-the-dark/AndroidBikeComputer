@@ -1,10 +1,5 @@
 package org.catinthedark.smartbike.app.calculator;
 
-import android.support.v4.util.ArrayMap;
-
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by kirill on 06.07.14.
  */
