@@ -99,7 +99,7 @@ public class MainActivity extends ActionBarActivity {
             cycleTimestamp = System.currentTimeMillis();
             return true;
         }
-        return false;
+        return super.onKeyDown(keyCode, keyevent);
     }
 
     @Override
