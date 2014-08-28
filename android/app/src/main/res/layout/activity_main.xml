@@ -15,6 +15,6 @@
             android:text="@string/default_speed"
             android:id="@+id/currentSpeedTextView"
             android:typeface="monospace"
-            android:textSize="40sp"
+            android:textSize="80sp"
             android:layout_centerVertical="true" android:layout_centerHorizontal="true"/>
 </RelativeLayout>
