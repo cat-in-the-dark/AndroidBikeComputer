@@ -44,8 +44,7 @@ public class SettingsActivity extends ActionBarActivity {
                 preferencesEditor.putInt(MainActivity.WHEEL_SIZE_PREFS_KEY, wheelSize);
                 preferencesEditor.putBoolean(MainActivity.SPEED_IN_MPH_PREFS_KEY, speenInmph);
                 preferencesEditor.apply();
-                Intent intent = new Intent(v.getContext(), MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
     }
